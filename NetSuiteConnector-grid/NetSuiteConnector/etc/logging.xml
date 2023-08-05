@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<logging xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Logging:etc/logging.xsd">
+    <groups>
+        <group name="zoku_netsuiteconnector">
+            <label translate="true">Zoku Connector Log</label>
+            <expected_models>
+                <expected_model class="Zoku\NetSuiteConnector\Model\CustomerGrid" />
+                <expected_model class="Zoku\NetSuiteConnector\Model\ProductGrid" />
+                <expected_model class="Zoku\NetSuiteConnector\Model\OrderGrid" />
+            </expected_models>
+            <events>
+                <event controller_action="netsuiteconnector_product_index"
+                       action_alias="productLogIndex" />
+                <event controller_action="netsuiteconnector_customer_index"
+                       action_alias="productCustomerIndex"/>
+                <event controller_action="netsuiteconnector_order_index"
+                       action_alias="productOrderIndex" />
+                <event controller_action="netsuiteconnector_customer_massdownload"
+                       action_alias="customerMassdownload" />
+                <event controller_action="netsuiteconnector_product_massdownload"
+                       action_alias="productMassdownload"/>
+                <event controller_action="netsuiteconnector_order_massdownload"
+                       action_alias="orderMassdownload" />
+            </events>
+        </group>
+    </groups>
+</logging>

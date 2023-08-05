@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Zoku_NetSuiteConnector::view" title="Logs" translate="title" module="Zoku_NetSuiteConnector" sortOrder="10" resource="Zoku_NetSuiteConnector::view" parent="Zoku_NetSuiteConnector::menu"/>
+        <add id="Zoku_NetSuiteConnector::product_view" title="Product Log" translate="title" module="Zoku_NetSuiteConnector" sortOrder="40" parent="Zoku_NetSuiteConnector::view" action="netsuiteconnector/product/index" resource="Zoku_NetSuiteConnector::product_view"/>
+        <add id="Zoku_NetSuiteConnector::customer_view" title="Customer Log" translate="title" module="Zoku_NetSuiteConnector" sortOrder="40" parent="Zoku_NetSuiteConnector::view" action="netsuiteconnector/customer/index" resource="Zoku_NetSuiteConnector::customer_view"/>
+        <add id="Zoku_NetSuiteConnector::order_view" title="Order Log" translate="title" module="Zoku_NetSuiteConnector" sortOrder="40" parent="Zoku_NetSuiteConnector::view" action="netsuiteconnector/order/index" resource="Zoku_NetSuiteConnector::order_view"/>
+
+        <add id="Zoku_NetSuiteConnector::zoku_configuration_tab" title="Configuration" translate="title" module="Zoku_NetSuiteConnector" sortOrder="50" parent="Zoku_NetSuiteConnector::menu" resource="Zoku_NetSuiteConnector::zoku_configuration_tab"/>
+        <add id="Zoku_NetSuiteConnector::config_link" title="Netsuite Connector Configuration" translate="title" module="Zoku_NetSuiteConnector" sortOrder="60" parent="Zoku_NetSuiteConnector::zoku_configuration_tab" action="adminhtml/system_config/edit/section/netsuiteconnector" resource="Zoku_NetSuiteConnector::config_link" target="_blank"/>
+    </menu>
+</config>

@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="zoku_connector_products_log" resource="default" engine="innodb" comment="Products Log">
+        <column xsi:type="smallint" name="log_id" unsigned="false" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="varchar" name="sku" nullable="false" length="255" comment="SKU"/>
+        <column xsi:type="int" name="price" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Price"/>
+        <column xsi:type="int" name="qty" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Qty"/>
+        <column xsi:type="int" name="product_netsuite_id" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Product Netsuite ID"/>
+        <column xsi:type="mediumtext" name="request_payload" nullable="true" comment="Request Payload"/>
+        <column xsi:type="mediumtext" name="response_payload" nullable="true" comment="Response Payload"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Update Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="log_id"/>
+        </constraint>
+        <index referenceId="ZOKU_CONNECTOR_PRODUCT_SKU" indexType="fulltext">
+            <column name="sku"/>
+        </index>
+        <index referenceId="ZOKU_CONNECTOR_PRODUCT_PRODUCT_NETSUITE_ID" indexType="btree">
+            <column name="product_netsuite_id"/>
+        </index>
+    </table>
+    <table name="zoku_connector_customer_log" resource="default" engine="innodb" comment="Customers Log">
+        <column xsi:type="smallint" name="log_id" unsigned="false" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="varchar" name="customer_email" nullable="false" length="255" comment="Customer Email"/>
+        <column xsi:type="boolean" name="flag" nullable="false" default="false" comment="Guest/Logged IN"/>
+        <column xsi:type="int" name="customer_netsuite_id" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Customer Netsuite ID"/>
+        <column xsi:type="mediumtext" name="request_payload" nullable="true" comment="Request Payload"/>
+        <column xsi:type="mediumtext" name="response_payload" nullable="true" comment="Response Payload"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Update Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="log_id"/>
+        </constraint>
+        <index referenceId="ZOKU_CONNECTOR_CUSTOMER_EMAIL" indexType="fulltext">
+            <column name="customer_email"/>
+        </index>
+        <index referenceId="ZOKU_CONNECTOR_CUSTOMER_NETSUITE_ID" indexType="btree">
+            <column name="customer_netsuite_id"/>
+        </index>
+    </table>
+    <table name="zoku_connector_order_log" resource="default" engine="innodb" comment="Orders Log">
+        <column xsi:type="smallint" name="log_id" unsigned="false" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="varchar" name="email" nullable="false" length="255" comment="Email"/>
+        <column xsi:type="int" name="increment_id" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Order Increment ID"/>
+        <column xsi:type="int" name="order_netsuite_id" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Order Netsuite ID"/>
+        <column xsi:type="mediumtext" name="request_payload" nullable="true" comment="Request Payload"/>
+        <column xsi:type="mediumtext" name="response_payload" nullable="true" comment="Response Payload"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Update Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="log_id"/>
+        </constraint>
+        <index referenceId="ZOKU_CONNECTOR_ORDER_EMAIL" indexType="fulltext">
+            <column name="email"/>
+        </index>
+        <index referenceId="ZOKU_CONNECTOR_ORDER_NETSUITE_ID" indexType="btree">
+            <column name="order_netsuite_id"/>
+        </index>
+    </table>
+    <table name="zoku_loyalty_points_history" resource="default" engine="innodb" comment="Customer Loyalty Points History">
+        <column xsi:type="smallint" name="id" unsigned="false" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Customer ID"/>
+        <column xsi:type="int" name="transaction_id" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Transaction ID"/>
+        <column xsi:type="mediumtext" name="memo" nullable="true" comment="Memo"/>
+        <column xsi:type="int" name="points" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Points"/>
+        <column xsi:type="timestamp" name="date" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Date"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="ZOKU_CONNECTOR_ORDER_EMAIL" indexType="fulltext">
+            <column name="memo"/>
+        </index>
+        <index referenceId="ZOKU_CONNECTOR_ORDER_NETSUITE_ID" indexType="btree">
+            <column name="customer_id"/>
+            <column name="transaction_id"/>
+        </index>
+    </table>
+    <!-- Add custom field inside sales_order table -->
+    <table name="sales_order" resource="sales" engine="innodb" comment="Sales Order">
+        <column xsi:type="smallint" name="netsuite_sync" unsigned="true" nullable="false"
+                identity="false" default="0" comment="Is Order Sync in Netsuite"/>
+    </table>
+    <!-- Add custom field inside sales_order_item table -->
+    <table name="sales_order_item" resource="sales" engine="innodb" comment="Sales Order Item">
+        <column xsi:type="int" name="netsuite_item_id" unsigned="true" nullable="false"
+                identity="false" default="0" comment="Netsuite Item ID"/>
+    </table>
+    <!-- Add custom field in customer_entity -->
+    <table name="customer_entity" resource="default" engine="innodb">
+        <column xsi:type="boolean" name="netsuite_synced" nullable="false" default="false" comment="Is Customer Synced to Netsuite"/>
+    </table>
+</schema>

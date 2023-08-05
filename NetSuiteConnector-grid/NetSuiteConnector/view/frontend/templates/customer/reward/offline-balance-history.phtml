@@ -1,0 +1,54 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Files.LineLength
+
+?>
+<?php
+/**
+ * @see \Zoku\NetSuiteConnector\Block\Customer\Reward\OfflineBalanceHistory
+ * @var \Zoku\NetSuiteConnector\Block\Customer\Reward\OfflineBalanceHistory $block
+ */
+?>
+<?php $data = $block->getData("customer_id");?>
+<div class="block-content reward-offline-balance-grid-block">
+    <?php if ($history = $block->getOfflinePointsHistory($data)): ?>
+        <?= $block->getChildHtml('pager') ?>
+        <div class="table-wrapper reward-history">
+        <table class="data table table-reward-history">
+            <caption class="table-caption"><?= $block->escapeHtml(__('Offline Balance History')) ?></caption>
+            <thead>
+                <tr>
+                    <th scope="col" class="col balance"><?= $block->escapeHtml(__('Transaction ID')) ?></th>
+                    <th scope="col" class="col amount"><?= $block->escapeHtml(__('Memo')) ?></th>
+                    <th scope="col" class="col points"><?= $block->escapeHtml(__('Points')) ?></th>
+                    <th scope="col" class="col date"><?= $block->escapeHtml(__('Date')) ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($history as $item): ?>
+                <tr>
+                    <td data-th="<?= $block->escapeHtml(__('Transaction ID')) ?>" classs="col transaction_id">
+                        <?= $block->escapeHtml($item->getTransactionId()) ?></td>
+                    <td data-th="<?= $block->escapeHtml(__('Memo')) ?>" classs="col memo">
+                        <?= $block->escapeHtml($item->getMemo()) ?></td>
+                    <td data-th="<?= $block->escapeHtml(__('Points')) ?>" classs="col points">
+                        <?= $block->escapeHtml($item->getPoints()) ?></td>
+                    <td data-th="<?= $block->escapeHtml(__('Date')) ?>" classs="col date">
+                        <span class="datetime"><?= $block->escapeHtml($item->getDate()) ?></span>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+        <?= $block->getChildHtml('pager') ?>
+    <?php else: ?>
+        <div class="message info empty"><span>
+                <?= $block->escapeHtml(__('There is no offline balance history.')) ?></span></div>
+    <?php endif;?>
+</div>
+

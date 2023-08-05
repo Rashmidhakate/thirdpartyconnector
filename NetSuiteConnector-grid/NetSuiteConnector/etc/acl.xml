@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+   <acl>
+     <resources>
+        <resource id="Magento_Backend::admin">
+           <resource id="Zoku_NetSuiteConnector::menu" title="Zoku" sortOrder="10" >
+               <resource id="Zoku_NetSuiteConnector::view" title="Logs" sortOrder="20" >
+                  <resource id="Zoku_NetSuiteConnector::product_view" title="Product Log" sortOrder="10" />  
+                  <resource id="Zoku_NetSuiteConnector::customer_view" title="Product Log" sortOrder="20" />  
+                  <resource id="Zoku_NetSuiteConnector::order_view" title="Product Log" sortOrder="30" />  
+               </resource> 
+               <resource id="Zoku_NetSuiteConnector::config" title="NetSuite Config" sortOrder="30" />
+           </resource>
+        </resource>
+     </resources>
+   </acl>
+</config>

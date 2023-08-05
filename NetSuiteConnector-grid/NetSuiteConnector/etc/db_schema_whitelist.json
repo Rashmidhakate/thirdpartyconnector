@@ -1,0 +1,92 @@
+{
+    "zoku_connector_products_log": {
+        "column": {
+            "log_id": true,
+            "sku": true,
+            "price": true,
+            "qty": true,
+            "product_netsuite_id": true,
+            "request_payload": true,
+            "response_payload": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        },
+        "index": {
+            "ZOKU_CONNECTOR_PRODUCTS_LOG_SKU": true,
+            "ZOKU_CONNECTOR_PRODUCTS_LOG_PRODUCT_NETSUITE_ID": true
+        }
+    },
+    "zoku_connector_customer_log": {
+        "column": {
+            "log_id": true,
+            "customer_email": true,
+            "flag": true,
+            "customer_netsuite_id": true,
+            "request_payload": true,
+            "response_payload": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        },
+        "index": {
+            "ZOKU_CONNECTOR_CUSTOMER_LOG_CUSTOMER_EMAIL": true,
+            "ZOKU_CONNECTOR_CUSTOMER_LOG_CUSTOMER_NETSUITE_ID": true
+        }
+    },
+    "zoku_connector_order_log": {
+        "column": {
+            "log_id": true,
+            "email": true,
+            "increment_id": true,
+            "order_netsuite_id": true,
+            "request_payload": true,
+            "response_payload": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        },
+        "index": {
+            "ZOKU_CONNECTOR_ORDER_LOG_EMAIL": true,
+            "ZOKU_CONNECTOR_ORDER_LOG_ORDER_NETSUITE_ID": true
+        }
+    },
+    "zoku_loyalty_points_history": {
+        "column": {
+            "id": true,
+            "customer_id": true,
+            "transaction_id": true,
+            "memo": true,
+            "points": true,
+            "date": true
+        },
+        "index": {
+            "ZOKU_LOYALTY_POINTS_HISTORY_MEMO": true,
+            "ZOKU_LOYALTY_POINTS_HISTORY_CUSTOMER_ID_TRANSACTION_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "sales_order": {
+        "column": {
+            "netsuite_sync": true
+        }
+    },
+    "sales_order_item": {
+        "column": {
+            "netsuite_item_id": true
+        }
+    },
+    "customer_entity": {
+        "column": {
+            "netsuite_synced": true
+        }
+    }
+}

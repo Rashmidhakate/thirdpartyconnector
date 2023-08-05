@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">zoku_connector_products_grid.zoku_connector_products_grid_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>zoku_connector_products_grid_columns</spinner>
+        <deps>
+            <dep>zoku_connector_products_grid.zoku_connector_products_grid_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="zoku_connector_products_grid_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">log_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Zoku_NetSuiteConnector::product_view</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="zoku_connector_products_grid_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>log_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+        </filters>
+        <massaction name="listing_massaction">
+            <action name="download">
+                <settings>
+                    <url path="netsuiteconnector/product/massdownload"/>
+                    <type>download</type>
+                    <label translate="true">Download</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="zoku_connector_products_grid_columns">
+        <settings>
+            <editorConfig>
+                <param name="indexField" xsi:type="string">log_id</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <param name="selectProvider" xsi:type="string">zoku_connector_products_grid.zoku_connector_products_grid.zoku_connector_products_grid_columns.ids</param>
+            </editorConfig>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">zoku_connector_products_grid.zoku_connector_products_grid.zoku_connector_products_grid_columns_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>log_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>55</resizeDefaultWidth>
+            </settings>
+        </selectionsColumn>
+        <column name="log_id" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sortable>true</sortable>
+            </settings>
+        </column>
+        <column name="sku" sortOrder="20">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Sku</label>
+                <sortable>true</sortable>
+            </settings>
+        </column>
+        <column name="price" sortOrder="30">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Price</label>
+                <sortable>true</sortable>
+            </settings>
+        </column>
+        <column name="qty" sortOrder="40">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Qty</label>
+                <sortable>true</sortable>
+            </settings>
+        </column>
+        <column name="product_netsuite_id" sortOrder="50">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Product NetSuite ID</label>
+                <sortable>true</sortable>
+            </settings>
+        </column>
+        <column name="request_payload" sortOrder="60">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Request Payload</label>
+                <sortable>true</sortable>
+            </settings>
+        </column>
+        <column name="response_payload" sortOrder="70">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Response Payload</label>
+                <sortable>true</sortable>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="80"> 
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Created</label>
+                <sortable>true</sortable>
+            </settings>
+        </column>
+        <column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="90">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Modified</label>
+                <sortable>true</sortable>
+            </settings>
+        </column>
+    </columns>
+</listing>

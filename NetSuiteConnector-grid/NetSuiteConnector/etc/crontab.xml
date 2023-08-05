@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="zoku_netsuiteconnector">
+        <job name="zoku_connector_log_remove" instance="Zoku\NetSuiteConnector\Cron\LogRemove" method="execute">
+            <config_path>netsuiteconnector/logs/cron_schedule</config_path>
+        </job>
+        <job name="zoku_connector_customer_loyalty_sync" instance="Zoku\NetSuiteConnector\Cron\CustomerLoyaltySync" method="execute">
+            <config_path>netsuiteconnector/loyalty_points/cron_schedule</config_path>
+        </job>
+        <job name="zoku_sync_products" instance="Zoku\NetSuiteConnector\Cron\SyncProducts" method="execute">
+            <config_path>netsuiteconnector/crons/sync_products_cron_time</config_path>
+        </job>
+        <job name="zoku_sync_customer" instance="Zoku\NetSuiteConnector\Cron\SyncCustomers" method="execute">
+            <config_path>netsuiteconnector/crons/sync_customers_cron_time</config_path>
+        </job>
+    </group>
+</config>
