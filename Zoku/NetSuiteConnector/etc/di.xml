@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Zoku\NetSuiteConnector\Api\ProductServiceInterface" type="Zoku\NetSuiteConnector\Model\Service\ProductService"/>
+    <preference for="Zoku\NetSuiteConnector\Api\CustomerServiceInterface" type="Zoku\NetSuiteConnector\Model\Service\CustomerService"/>
+    <preference for="Zoku\NetSuiteConnector\Api\OrderServiceInterface" type="Zoku\NetSuiteConnector\Model\Service\OrderService"/>
+    <type name="Zoku\NetSuiteConnector\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Zoku\NetSuiteConnector\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">zokuConnectorHandler</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Zoku\NetSuiteConnector\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Zoku\NetSuiteConnector\Model\ResourceModel\ProductGrid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">zoku_connector_products_log</argument>
+            <argument name="resourceModel" xsi:type="string">Zoku\NetSuiteConnector\Model\ResourceModel\ProductGrid</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Zoku\NetSuiteConnector\Model\ResourceModel\CustomerGrid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">zoku_connector_customer_log</argument>
+            <argument name="resourceModel" xsi:type="string">Zoku\NetSuiteConnector\Model\ResourceModel\CustomerGrid</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Zoku\NetSuiteConnector\Model\ResourceModel\OrderGrid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">zoku_connector_order_log</argument>
+            <argument name="resourceModel" xsi:type="string">Zoku\NetSuiteConnector\Model\ResourceModel\OrderGrid</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="zoku_connector_products_grid_data_source" xsi:type="string">Zoku\NetSuiteConnector\Model\ResourceModel\ProductGrid\Collection</item>
+                <item name="zoku_connector_customer_grid_data_source" xsi:type="string">Zoku\NetSuiteConnector\Model\ResourceModel\CustomerGrid\Collection</item>
+                <item name="zoku_connector_order_grid_data_source" xsi:type="string">Zoku\NetSuiteConnector\Model\ResourceModel\OrderGrid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Zoku\NetSuiteConnector\Api\ProductGridRepositoryInterface" type="Zoku\NetSuiteConnector\Model\ProductGridRepository" />
+    <preference for="Zoku\NetSuiteConnector\Api\Data\ProductGridInterface" type="Zoku\NetSuiteConnector\Model\ProductGrid" />
+    <preference for="Zoku\NetSuiteConnector\Api\Data\ProductGridSearchResultInterface" type="Magento\Framework\Api\SearchResults" />
+    <virtualType name="Zoku\NetSuiteConnector\Model\Api\SearchCriteria\ProductGridCollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor</item>
+                <item name="sorting" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Zoku\NetSuiteConnector\Model\ProductGridRepository">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Zoku\NetSuiteConnector\Model\Api\SearchCriteria\ProductGridCollectionProcessor</argument>
+        </arguments>
+    </type>
+    <preference for="Zoku\NetSuiteConnector\Api\CustomerGridRepositoryInterface" type="Zoku\NetSuiteConnector\Model\CustomerGridRepository" />
+    <preference for="Zoku\NetSuiteConnector\Api\Data\CustomerGridInterface" type="Zoku\NetSuiteConnector\Model\CustomerGrid" />
+    <preference for="Zoku\NetSuiteConnector\Api\Data\CustomerGridSearchResultInterface" type="Magento\Framework\Api\SearchResults" />
+    <virtualType name="Zoku\NetSuiteConnector\Model\Api\SearchCriteria\CustomerGridCollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor</item>
+                <item name="sorting" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Zoku\NetSuiteConnector\Model\CustomerGridRepository">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Zoku\NetSuiteConnector\Model\Api\SearchCriteria\CustomerGridCollectionProcessor</argument>
+        </arguments>
+    </type>
+    <preference for="Zoku\NetSuiteConnector\Api\OrderGridRepositoryInterface" type="Zoku\NetSuiteConnector\Model\OrderGridRepository" />
+    <preference for="Zoku\NetSuiteConnector\Api\Data\OrderGridInterface" type="Zoku\NetSuiteConnector\Model\OrderGrid" />
+    <preference for="Zoku\NetSuiteConnector\Api\Data\OrderGridSearchResultInterface" type="Magento\Framework\Api\SearchResults" />
+    <virtualType name="Zoku\NetSuiteConnector\Model\Api\SearchCriteria\OrderGridCollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor</item>
+                <item name="sorting" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Zoku\NetSuiteConnector\Model\OrderGridRepository">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Zoku\NetSuiteConnector\Model\Api\SearchCriteria\OrderGridCollectionProcessor</argument>
+        </arguments>
+    </type>
+</config>

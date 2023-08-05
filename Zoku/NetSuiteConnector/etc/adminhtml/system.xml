@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Zoku, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="netsuiteconnector" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Zoku NetSuiteConnector</label>
+            <tab>zoku</tab>
+            <resource>Zoku_NetSuiteConnector::config</resource>
+            <group id="logs" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Logs</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="no_of_days" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>No of days to remove logs</label>
+                    <depends>
+                        <field id="netsuiteconnector/logs/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="cron_schedule" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cron Scheduling</label>
+                    <depends>
+                        <field id="netsuiteconnector/logs/enabled">1</field>
+                    </depends>
+                    <comment><![CDATA[For Example :- 0****]]></comment>
+                </field>
+            </group>
+            <group id="loyalty_points" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Customer Loyalty Points Sync</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cron_schedule" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cron Scheduling</label>
+                    <depends>
+                        <field id="netsuiteconnector/loyalty_points/enabled">1</field>
+                    </depends>
+                    <comment><![CDATA[For Example :- 0****]]></comment>
+                </field>
+            </group>
+            <group id="authenticate" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1">
+                <label>Authentication</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="environment" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1">
+                    <label>Environment</label>
+                    <source_model>Zoku\NetSuiteConnector\Model\Config\Source\Environment</source_model>
+                    <depends>
+                        <field id="netsuiteconnector/authenticate/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="base_url_staging" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1">
+                    <label>Sandbox Base URL</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="netsuiteconnector/authenticate/environment">1</field>
+                    </depends>
+                </field>
+                <field id="username_staging" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1">
+                    <label>Sandbox Username</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="netsuiteconnector/authenticate/environment">1</field>
+                    </depends>
+                </field>
+                <field id="password_staging" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1">
+                    <label>Sandbox Password</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="netsuiteconnector/authenticate/environment">1</field>
+                    </depends>
+                </field>
+                <field id="base_url_production" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1">
+                    <label>Production Base URL</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="netsuiteconnector/authenticate/environment">2</field>
+                    </depends>
+                </field>
+                <field id="username_production" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1">
+                    <label>Production Username</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="netsuiteconnector/authenticate/environment">2</field>
+                    </depends>
+                </field>
+                <field id="password_production" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1">
+                    <label>Production Password</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="netsuiteconnector/authenticate/environment">2</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
